@@ -4,7 +4,7 @@
             <h4 class="card-title mt-3 text-center">Create Account</h4>
             <p class="text-center">Get started with your free account</p>
  
-            <form name="form"  #form="ngForm">{{form.valid}}
+            <form name="form"  #form="ngForm">
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -78,7 +78,7 @@
                 <div class="form-group">          
                     <button [disabled]=!form.valid type="submit" class="btn btn-primary btn-block" (click)="onSubmit()"> Create Account  </button>
                 </div>   
-                <p class="text-center">Have an account? <a href="">Log In</a> </p>                                                                 
+                <p class="text-center">Have an account? <a  routerLink="/login">Log In</a> </p>                                                                 
             </form>
         </article>
     </div>     

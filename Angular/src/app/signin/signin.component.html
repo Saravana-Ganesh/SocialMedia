@@ -1,0 +1,47 @@
+<div class="container login-container">
+    <div class="row loginCard">
+        <div class="col-md-6 login-form-2">
+            <h3>Login</h3>
+            <form name="form"  #form="ngForm">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                    </div>
+                    <input name="email" class="form-control" placeholder="Email address" type="email"  [(ngModel)]="model.email" #email="ngModel"
+                    [ngClass]="{ 'is-invalid': email.invalid && email.touched }" required email>
+                    <div *ngIf="email.invalid" class="invalid-feedback">
+                        <div *ngIf="email.errors.required">Email is required</div>
+                        <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                    </div>
+                </div> 
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Enter password" type="password" name="password"  [(ngModel)]="model.password" 
+                    #password="ngModel"
+                    [ngClass]="{ 'is-invalid':password.invalid && password.touched}" required minlength="6">
+                    <div *ngIf="password.invalid" class="invalid-feedback">
+                        <div *ngIf="password.errors.required">Password is required</div>
+                        <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>                
+                    </div>
+                    
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    <div *ngIf="(invalidPassword==false)" style="color: red;">Invalid Email or Password</div>  
+                </div>
+                <div class="form-group">
+                    <!-- <input [disabled]=!form.valid  type="submit" class="btnSubmit" value="Login" /> -->
+                    <button [disabled]=!form.valid type="submit" class="btnSubmit" (click)="onSubmit()">Login</button>
+                </div>
+                <div class="form-group">
+                    <a href="#" class="ForgetPwd" value="Login">Forget Password?</a>                                 
+                </div>
+                <div class="form-group">
+                    <a routerLink="/" class="ForgetPwd signup" value="Login">SignUp</a>      
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
