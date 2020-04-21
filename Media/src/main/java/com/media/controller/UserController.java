@@ -20,5 +20,11 @@ public class UserController {
 		UserService userService= (UserService)applicationContext.getBean("userService");
 		return userService.signup(userSignupFormBO,applicationContext); 
 	}
+	@PostMapping(value="/signin",produces = MediaType.APPLICATION_JSON_VALUE)
+	public boolean signin(@RequestBody UserSignupFormBO userSignupFormBO) {
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+		UserService userService= (UserService)applicationContext.getBean("userService");
+		return userService.signin(userSignupFormBO,applicationContext); 
+	}
 }          
          

@@ -11,4 +11,9 @@ public class UserService {
 		UserDAOImpl userDAOImpl = (UserDAOImpl)applicationContext.getBean("userDAOImpl");
 		return userDAOImpl.signup(userSignupFormBO);
 	}
+	
+	public boolean signin(UserSignupFormBO userSignupFormBO,ApplicationContext applicationContext) {
+		UserDAOImpl userDAOImpl = (UserDAOImpl)applicationContext.getBean("userDAOImpl");
+		return userDAOImpl.signin(userSignupFormBO);
+	}
 }
