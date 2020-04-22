@@ -31,13 +31,12 @@ public class UserDAOImpl implements UserDAO{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-/*			 factory.close();  
+			 factory.close();  
 			 session.close();
 			 HibernateUtils.factory = null;
-*/			 session.evict(userSignupFormBO);
 		}
 		return save;
-	}
+	}          
 	@Override
 	public  boolean signin(UserSignupFormBO userSignupFormBO) {
 		boolean validUser = false;
@@ -53,7 +52,9 @@ public class UserDAOImpl implements UserDAO{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			session.evict(userSignupFormBO);
+			 factory.close();  
+			 session.close();
+			 HibernateUtils.factory = null;			
 		}		
 		return validUser;
 	}
