@@ -8,12 +8,20 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { RouterModule } from '@angular/router';
 import { SigninComponent } from './signin/signin.component';
+import { HomeComponent } from './home/home.component';
+import { TopComponent } from './top/top.component';
+import { MessageComponent } from './message/message.component';
+import { FindFriendComponent } from './find-friend/find-friend.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
-    SigninComponent        
+    SigninComponent,
+    HomeComponent,
+    TopComponent,
+    MessageComponent,
+    FindFriendComponent        
   ],        
   imports: [   
     BrowserModule,
@@ -23,10 +31,13 @@ import { SigninComponent } from './signin/signin.component';
     RouterModule.forRoot([
       { path: '', component: SignupComponent },
       {path:'login',component:SigninComponent},
+      {path:'home',component:HomeComponent},
+      {path:'messages',component:MessageComponent},
+      {path:'findFriend',component:FindFriendComponent},
       
     ])
   ],  
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { }        
