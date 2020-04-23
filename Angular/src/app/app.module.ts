@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';       
 import { SignupComponent } from './signup/signup.component';
@@ -33,7 +34,7 @@ import { FindFriendComponent } from './find-friend/find-friend.component';
       {path:'login',component:SigninComponent},
       {path:'home',component:HomeComponent},
       {path:'messages',component:MessageComponent},
-      {path:'findFriend',component:FindFriendComponent},
+      {path:'findFriends',component:FindFriendComponent},
       
     ])
   ],  

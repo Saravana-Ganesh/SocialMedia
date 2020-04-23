@@ -17,4 +17,7 @@ export class TopComponent implements OnInit {
   messages(){
     this.router.navigateByUrl('/messages');
   }
+  home(){
+    this.router.navigateByUrl('/home');
+  }
 }

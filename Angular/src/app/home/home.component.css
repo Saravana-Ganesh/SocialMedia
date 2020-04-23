@@ -1,0 +1,7 @@
+.nav-link{
+    cursor:pointer;
+    color:#a8a9b4 !important
+  }
+  .nav-link:hover {
+    color: whitesmoke !important;
+  }
