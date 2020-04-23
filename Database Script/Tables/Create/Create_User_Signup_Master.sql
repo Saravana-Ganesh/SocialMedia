@@ -1,4 +1,4 @@
-CREATE TABLE User_Signup_Master(
+CREATE TABLE ACCOUNT_MASTER(
   Email varchar(100) primary key,
   UserId int default 0 unique,
   UserName varchar(100),
