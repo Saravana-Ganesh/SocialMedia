@@ -1,6 +1,8 @@
 package com.media.constants;
 
 public class TableConstants {
-	public static final String USER_SIGNUP_MASTER = "User_Signup_Master";
+	public static final String ACCOUNT_MASTER            = "Account_MASTER";
+	public static final String FRIENDS_MASTER            = "Friends_Master";
+	public static final String FRIEND_REQUEST_MASTER     = "Friend_Request_Master";
 
 }

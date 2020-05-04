@@ -1,8 +1,12 @@
 package com.media.dao;
 
-import com.media.bo.UserSignupFormBO;
+import com.media.bo.AccountMasterBO;
+import com.media.bo.FriendRequestMasterBO;
+import com.media.bo.ResponseBO;
 
 public interface UserDAO {
-	public abstract boolean signup(UserSignupFormBO userSignupFormBO);
-	public abstract boolean signin(UserSignupFormBO userSignupFormBO);
+	public abstract boolean signup(AccountMasterBO userSignupFormBO);
+	public abstract ResponseBO signin(AccountMasterBO userSignupFormBO);
+	public abstract ResponseBO findFriends(AccountMasterBO userSignupFormBO);
+	boolean addFriend(FriendRequestMasterBO friendRequestMasterBO);
 }

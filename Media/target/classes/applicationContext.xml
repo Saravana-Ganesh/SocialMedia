@@ -6,7 +6,13 @@
     http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context.xsd">
      
-    <bean id="userService"    class="com.media.service.UserService"></bean>
-    <bean id="userDAOImpl"    class="com.media.daoimpl.UserDAOImpl"></bean>
+    <bean id="userService"         class="com.media.service.UserService"></bean>
+    <bean id ="homePageService"    class="com.media.service.HomePageService"></bean>
+    <bean id ="friendService"      class="com.media.service.FriendService"></bean>
+    
+    <bean id="userDAOImpl"         class="com.media.daoimpl.UserDAOImpl"></bean>
+    <bean id="homePageDAOImpl"     class="com.media.daoimpl.HomePageDAOImpl"></bean>
+    <bean id="friendDAOImpl"       class="com.media.daoimpl.FriendDAOImpl"></bean>
+    
        
 </beans> 
