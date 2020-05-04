@@ -23,8 +23,9 @@ export class SigninComponent implements OnInit {
     console.log(JSON.stringify(this.model));     
     return this.configService.submitSignin(JSON.stringify(this.model)).subscribe(
       res => {
+        //this.configService.overAllSharedData = res;
         console.log(res);
-        this.invalidPassword = res;
+        this.invalidPassword = res.valid;
         if(this.invalidPassword==true){
             localStorage.setItem('email',this.model.email)
             localStorage.setItem('isLoggedIn','true');

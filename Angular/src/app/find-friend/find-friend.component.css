@@ -6,7 +6,30 @@
 .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, 
 .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3,
  .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto{
-  position: unset ;
+   position: unset ; 
+}
+.btn{
+  border-radius: 0 !important;
+}
+.btn-default{
+  background-color: #f5f6f7;
+  border-color: #ccd0d5;
+  color: #4b4f56;
+}
+.col-md-8{
+  border: 1px solid #e3d4d4;
+  margin-top:3%;
+}
+.content .fixedHeightContainer .innerContent .col-md-8{
+  background-color:#fff;
+}
+.content{
+  background: #e9ebee;
+}
+/* To remove focus on bootstrap button after click*/
+.btn:focus {
+  outline: none;
+  box-shadow: none;
 }
 .sticky {
   position: fixed;

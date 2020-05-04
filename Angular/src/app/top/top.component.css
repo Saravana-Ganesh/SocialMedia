@@ -1,5 +1,6 @@
 @import url("http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 /* @import url("https://use.fontawesome.com/releases/v5.0.8/css/all.css"); */
+
 .navbar-icon-top .navbar-nav .nav-link > .fa {
   position: relative;
   width: 36px;
@@ -13,7 +14,8 @@
     height:auto;
     /* Themes */
     /* background-color: #4267b2 !important; */
-    background-color: #000000!important;
+    /* background-color: #000000!important; */
+    background-color: #303b59 !important;
     overflow: hidden !important;
     
 
