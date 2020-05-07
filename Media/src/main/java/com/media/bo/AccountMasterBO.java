@@ -24,6 +24,7 @@ public class AccountMasterBO {
 	@Column(name="isActive")
 	private int isActive=1;
 	
+	
 	public void setIsActive(int isActive) {
 		this.isActive = isActive;
 	}

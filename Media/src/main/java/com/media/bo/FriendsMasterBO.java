@@ -1,11 +1,8 @@
 package com.media.bo;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.media.constants.TableConstants;
@@ -15,7 +12,7 @@ import com.media.constants.TableConstants;
 public class FriendsMasterBO {	
 	@Id
 	@Column(name = "ID",unique=true)
-	private String id;
+	private int id;
 	
 	@Column(name="USER_EMAIL")
 	private String userEmail;
@@ -35,10 +32,10 @@ public class FriendsMasterBO {
 	public void setFriendEmail(String friendEmail) {
 		this.friendEmail = friendEmail;
 	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

@@ -23,6 +23,9 @@ public class FriendRequestMasterBO {
 	@Column(name = "STATUS")
 	private int status;
 	
+	@Column(name = "IS_DELETE")
+	private int isDelete;
+	
 	public String getFromUser() {
 		return fromUser;
 	}
@@ -46,6 +49,12 @@ public class FriendRequestMasterBO {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
 	}
 	
 }
