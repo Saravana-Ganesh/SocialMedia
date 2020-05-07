@@ -2,6 +2,36 @@
     <div class="header" id="myheader">
         <app-top></app-top>
     </div>
+    <div class="content" *ngIf= friendRequestPage&&!friendRequestExist&&!viewSentFriendRequest>   
+        <div class="container findFriend fixedHeightContainer" >
+            <div class="row innerContent">
+                <div class="col-md-8">
+                    <div class="heading" style="padding: 2%;        
+                            font-weight: bold;">
+                        <h4>No Friend Request Yet</h4> 
+                        <div class="link">
+                            <a (click)=viewSentRequests()>View Sent Requests</a>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content" *ngIf= !friendRequestPage&&!viewSentFriendRequestExist>   
+        <div class="container findFriend fixedHeightContainer" >
+            <div class="row innerContent">
+                <div class="col-md-8">
+                    <div class="heading" style="padding: 2%;        
+                            font-weight: bold;">
+                        <h4>No Friend Request Sent Yet</h4>   
+                        <div class="link">
+                            <a (click)=ngOnInit()>View Received Requests</a>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="content" *ngIf=friendRequestExist>   
         <div class="container findFriend fixedHeightContainer" >
             <div class="row innerContent">
@@ -36,13 +66,16 @@
             </div>
         </div>
     </div>
-    <div class="content" *ngIf=viewFriendRequest>   
+    <div class="content" *ngIf=viewSentFriendRequest&&viewSentFriendRequestExist>   
         <div class="container findFriend fixedHeightContainer" >
             <div class="row innerContent">
                 <div class="col-md-8">
                     <div class="heading" style="padding: 2%;        
                     font-weight: bold;">
-                        <h4>Your Friend Requests</h4>   
+                        <h4>Friend Requests Sent</h4> 
+                        <div class="link">
+                            <a (click)=ngOnInit()>View Received Requests</a>
+                        </div>   
                     </div>                           
                     <div class="people-nearby">                   
                     <div class="nearby-user" *ngFor="let account of friendRequestData">                
@@ -72,9 +105,9 @@
                     <div class="heading" style="padding: 2%;        
                     font-weight: bold;">
                         <h4>People You May Know</h4>   
-                        <div *ngIf=!friendRequestExist&&(!viewFriendRequest) class="link">
+                        <!-- <div *ngIf=!friendRequestExist&&(!viewSentFriendRequest) class="link">
                             <a (click)=viewSentRequests()>View Sent Requests</a>
-                        </div>    
+                        </div>     -->
                     </div>                                   
                     <div class="people-nearby">                   
                     <div class="nearby-user" *ngFor="let account of result">                

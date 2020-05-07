@@ -19,20 +19,24 @@ export class FindFriendComponent implements OnInit {
   friendRequestData =[];
   confirmFriendRequestID='';
   deleteFriendRequestID='';
+  friendRequestPage = false;
   friendRequestExist = false;
-  viewFriendRequest = false;
+  viewSentFriendRequest = false;
+  viewSentFriendRequestExist = false;
   @ViewChild(TopComponent) childComponent: TopComponent;
   constructor(
     private configService:ConfigService,
   ) { }
 
   ngOnInit(): void {
+    this.viewSentFriendRequest = false;
     window.addEventListener('scroll', this.scroll, true); //third parameter
     this.header = document.getElementById("myheader");
     this.sticky = this.header.offsetTop;
     this.data = {email:localStorage.getItem('email')};
     this.configService.findFriends(JSON.stringify(this.data)).subscribe(
       res =>{
+        this.friendRequestPage = true;
         console.log(res);
         this.changeBO(res.headerResponseBO.friendRequestMasterBO);
         this.result = res.accountMasterBO;
@@ -108,20 +112,24 @@ export class FindFriendComponent implements OnInit {
     )
   }
   viewSentRequests(){
+    this.friendRequestPage = false;
     this.friendRequestExist = false;
-    this.viewFriendRequest = true;
+    this.viewSentFriendRequest = true;
     this.data={
       email:localStorage.getItem('email')
     }
     return this.configService.viewSentRequests(JSON.stringify(this.data)).subscribe(
       res=>{
-        console.log(res);
         res = res.accountMasterBO;
         this.changeBO(res);
+        if(res.length>0){
+          this.viewSentFriendRequestExist = true;
+        }
       }
     )
   }
   changeBO(rawdata){
+    this.friendRequestData=[];
     //This method converts raw two dimensional array to JSON array
     for(let i=0;i<rawdata.length;i++){
       this.friendRequestData.push({
