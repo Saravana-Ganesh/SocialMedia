@@ -76,19 +76,36 @@ export class FindFriendComponent implements OnInit {
     
   }
   deleteRequest(email,requestID){
-    this.data={
-      "id":requestID,
-      "fromUser":email,
-      "toUser": localStorage.getItem('email'),
-      "isDelete":1
-    }
     this.deleteFriendRequestID = requestID+'_delete';
     this.confirmFriendRequestID = requestID+'_accept';
+    if(document.getElementById(this.deleteFriendRequestID).textContent=="Request Cancelled"){
+      console.log('Invalid confirm request');
+      return;
+  }
+    if(this.friendRequestPage==false){
+      this.data={
+        "id":requestID,
+        "fromUser":email,
+        "toUser": localStorage.getItem('email'),
+        "isDelete":1
+      }
+    }else{
+      this.data={
+        "id":requestID,
+        "fromUser":localStorage.getItem('email'),
+        "toUser": email,
+        "isDelete":1
+      }
+    }        
     return this.configService.deleteFriendRequest(JSON.stringify(this.data)).subscribe(
       res => {
-        var link = document.getElementById(this.deleteFriendRequestID);
-        link.style.visibility = 'hidden';
-        document.getElementById(this.confirmFriendRequestID).innerHTML = "Request Cancelled"; 
+        if(this.friendRequestPage==false){
+          document.getElementById(this.deleteFriendRequestID).innerHTML = "Request Cancelled";
+        }else{
+            var link = document.getElementById(this.deleteFriendRequestID);
+            link.style.visibility = 'hidden';
+            document.getElementById(this.confirmFriendRequestID).innerHTML = "Request Cancelled"; 
+        }        
       });
   }
   confirmRequest(email,requestID){
