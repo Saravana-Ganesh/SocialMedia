@@ -8,9 +8,10 @@ import { ConfigService } from '../services/config.service';
   styleUrls: ['./top.component.css']
 })
 export class TopComponent implements OnInit { 
-  friendRequestCount:bigint;
+  friendRequestCount:number;
   data:any;
   load = false;
+  friendRequestNoitification = false;
   constructor(
     private router: Router,
     private configService:ConfigService,
@@ -27,6 +28,9 @@ export class TopComponent implements OnInit {
     this.data = res;
     console.log('Header called');
     this.friendRequestCount = this.data.friendRequestMasterBO.length
+    if(this.friendRequestCount!=0){
+      this.friendRequestNoitification = true;
+    }
   }
   messages(){
     this.router.navigateByUrl('/messages');

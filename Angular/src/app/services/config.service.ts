@@ -42,6 +42,16 @@ export class ConfigService {
     return this.http.post<any>('Media/home',data , {headers: this.headers});
   }
 
+  deleteFriendRequest(data){
+    return this.http.post<any>('Media/deleteFriendRequest',data , {headers: this.headers});
+  }
+  acceptFriendRequest(data){
+    return this.http.post<any>('Media/acceptFriendRequest',data , {headers: this.headers});
+  }
+  viewSentRequests(data){
+    return this.http.post<any>('Media/viewSentRequests',data , {headers: this.headers});
+  }
+
   // , {headers: this.headers}
     
 }

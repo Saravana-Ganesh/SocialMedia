@@ -17,6 +17,10 @@ export class FindFriendComponent implements OnInit {
   buttonTextDelete = "Delete"
   friendRequestCount : number;
   friendRequestData =[];
+  confirmFriendRequestID='';
+  deleteFriendRequestID='';
+  friendRequestExist = false;
+  viewFriendRequest = false;
   @ViewChild(TopComponent) childComponent: TopComponent;
   constructor(
     private configService:ConfigService,
@@ -30,10 +34,13 @@ export class FindFriendComponent implements OnInit {
     this.configService.findFriends(JSON.stringify(this.data)).subscribe(
       res =>{
         console.log(res);
-        this.changeBO(res);
+        this.changeBO(res.headerResponseBO.friendRequestMasterBO);
         this.result = res.accountMasterBO;
         this.friendRequestCount = res.headerResponseBO.friendRequestMasterBO.length;
         this.childComponent.loadHeader(res.headerResponseBO);
+        if(this.friendRequestCount!=0){
+          this.friendRequestExist = true;
+        }
       }
     );
   }
@@ -64,12 +71,63 @@ export class FindFriendComponent implements OnInit {
       });
     
   }
+  deleteRequest(email,requestID){
+    this.data={
+      "id":requestID,
+      "fromUser":email,
+      "toUser": localStorage.getItem('email'),
+      "isDelete":1
+    }
+    this.deleteFriendRequestID = requestID+'_delete';
+    this.confirmFriendRequestID = requestID+'_accept';
+    return this.configService.deleteFriendRequest(JSON.stringify(this.data)).subscribe(
+      res => {
+        var link = document.getElementById(this.deleteFriendRequestID);
+        link.style.visibility = 'hidden';
+        document.getElementById(this.confirmFriendRequestID).innerHTML = "Request Cancelled"; 
+      });
+  }
+  confirmRequest(email,requestID){
+    this.deleteFriendRequestID = requestID+'_delete';
+    this.confirmFriendRequestID = requestID+'_accept';  
+    if(document.getElementById(this.confirmFriendRequestID).textContent!=this.buttonTextConfirm){
+        console.log('Invalid confirm request');
+        return;
+    }
+    this.data={
+      "id":requestID,
+      "userEmail":localStorage.getItem('email'),
+      "friendEmail":email
+    }
+    return this.configService.acceptFriendRequest(JSON.stringify(this.data)).subscribe(
+      res=>{
+        var link = document.getElementById(this.deleteFriendRequestID);
+         link.style.visibility = 'hidden';
+         document.getElementById(this.confirmFriendRequestID).innerHTML = "Friends"; 
+      }
+    )
+  }
+  viewSentRequests(){
+    this.friendRequestExist = false;
+    this.viewFriendRequest = true;
+    this.data={
+      email:localStorage.getItem('email')
+    }
+    return this.configService.viewSentRequests(JSON.stringify(this.data)).subscribe(
+      res=>{
+        console.log(res);
+        res = res.accountMasterBO;
+        this.changeBO(res);
+      }
+    )
+  }
   changeBO(rawdata){
-    rawdata = rawdata.headerResponseBO.friendRequestMasterBO;
+    //This method converts raw two dimensional array to JSON array
     for(let i=0;i<rawdata.length;i++){
       this.friendRequestData.push({
-        "name":rawdata[i][0],
-        "email":rawdata[i][1]
+        "requestID":rawdata[i][0],
+        "name":rawdata[i][1],
+        "email":rawdata[i][2]
       })
     }
     console.log(this.friendRequestData);

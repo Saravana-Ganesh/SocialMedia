@@ -35,7 +35,7 @@
           <li class="nav-item">
             <a class="nav-link" title="Friend Requests" (click)=friendsPage()>
               <i class="fa fa-user-plus fa-1x">
-                <span class="badge badge-danger">{{friendRequestCount}}</span>
+                <span *ngIf=friendRequestNoitification class="badge badge-danger">{{friendRequestCount}}</span>
               </i>			 
             </a>
           </li>   
