@@ -57,4 +57,13 @@ public class QueryHelper {
 		" on frm.toUser = AM.email " + 
 		" where frm.fromUser = :fromUser and frm.status = 0 and frm.isDelete=0";
 	}
+	
+	public static String viewFriends() {
+		//Query for view friend requests
+		return "select distinct AM.id ,AM.name,AM.email from AccountMasterBO AM " + 
+				" inner join FriendsMasterBO FM " + 
+				" on FM.friendEmail=AM.email or FM.userEmail = AM.email " + 
+				" where (FM.friendEmail=:currentUserEmail or FM.userEmail=:currentUserEmail) " + 
+				" and AM.email!=:currentUserEmail";
+	}
 }

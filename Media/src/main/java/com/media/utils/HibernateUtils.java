@@ -7,6 +7,10 @@ public class HibernateUtils {
 
     public static SessionFactory factory;
     
+    static {
+    	getSessionFactory();
+    }
+    
     //to disallow creating objects by other classes.
     private HibernateUtils() {
     }

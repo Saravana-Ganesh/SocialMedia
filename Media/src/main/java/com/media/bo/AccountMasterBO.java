@@ -23,6 +23,8 @@ public class AccountMasterBO {
 	private int password;
 	@Column(name="isActive")
 	private int isActive=1;
+	@Column(name="userid")
+	private int id=1;
 	
 	
 	public void setIsActive(int isActive) {
@@ -60,6 +62,12 @@ public class AccountMasterBO {
 	}
 	public void setPassword(String password) {
 		this.password = password.hashCode();
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

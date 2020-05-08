@@ -43,5 +43,16 @@ public class FriendDAOImpl implements FriendDAO {
 		responseBO.setAccountMasterBO(results);
 		return responseBO;		
 	}
+	public ResponseBO viewFriends(AccountMasterBO accountMasterBO) {
+		String email = accountMasterBO.getEmail();
+		Query  query= session.createQuery(QueryHelper.viewFriends());
+		query.setParameter("currentUserEmail", email);
+		query.setParameter("currentUserEmail", email);
+		query.setParameter("currentUserEmail", email);
+		List<AccountMasterBO> results = query.list();
+		ResponseBO responseBO = new ResponseBO();
+		responseBO.setAccountMasterBO(results);
+		return responseBO;		
+	}
 	
 }

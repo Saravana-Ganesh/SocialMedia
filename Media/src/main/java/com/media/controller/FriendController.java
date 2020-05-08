@@ -35,4 +35,11 @@ public class FriendController {
 		FriendService friendService= (FriendService)applicationContext.getBean("friendService");
 		return friendService.viewSentRequests(applicationContext,accountMasterBO); 
 	}
+	
+	@PostMapping(value="/viewFriends",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseBO viewFriends(@RequestBody AccountMasterBO accountMasterBO) {
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+		FriendService friendService= (FriendService)applicationContext.getBean("friendService");
+		return friendService.viewFriends(applicationContext,accountMasterBO); 
+	}
 }

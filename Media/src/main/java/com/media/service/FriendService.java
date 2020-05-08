@@ -26,4 +26,9 @@ public class FriendService {
 		return friendDAOImpl.viewFriendRequests(accountMasterBO);
 	}
 
+	public ResponseBO viewFriends(ApplicationContext applicationContext, AccountMasterBO accountMasterBO) {
+		FriendDAOImpl friendDAOImpl= (FriendDAOImpl)applicationContext.getBean("friendDAOImpl");
+		return friendDAOImpl.viewFriends(accountMasterBO);
+	}
+
 }
