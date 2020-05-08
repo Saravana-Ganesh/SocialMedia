@@ -25,13 +25,14 @@ export class HomeComponent implements OnInit {
       return;
     }
     console.log('Home component')
-    this.name = "Saravana";    
+    this.name = "";    
     this.data ={
       "email":localStorage.getItem('email')
     }
     this.configService.loadHomeContent(this.data).subscribe(
       res => {        
         this.name = res.accountMasterBO[0].name;
+        localStorage.setItem('name',this.name);
         this.configService.setOverAllSharedData(res);
         this.childComponent.loadHeader(res.headerResponseBO);
       });      

@@ -12,6 +12,7 @@ export class TopComponent implements OnInit {
   data:any;
   load = false;
   friendRequestNoitification = false;
+  name:string;
   constructor(
     private router: Router,
     private configService:ConfigService,
@@ -21,12 +22,15 @@ export class TopComponent implements OnInit {
     if(localStorage.getItem('email')=='' || localStorage.getItem('email')==undefined
     ||localStorage.getItem('isLoggedIn')=='false'){
       console.log('logged out');
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login');     
     }
+    this.name = localStorage.getItem('name');
   }
   loadHeader(res){
+    this.name = localStorage.getItem('name');
     this.data = res;
     console.log('Header called');
+    console.log(res);
     this.friendRequestCount = this.data.friendRequestMasterBO.length
     if(this.friendRequestCount!=0){
       this.friendRequestNoitification = true;
