@@ -1,0 +1,97 @@
+/* Overrided bootstrap css for fixing top bar problem */
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, 
+.col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, 
+.col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12,
+.col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, 
+.col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, 
+.col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3,
+ .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto{
+   position: unset ; 
+}
+.link{
+  color: #149ddd;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.btn{
+  border-radius: 0 !important;
+}
+.btn-default{
+  background-color: #f5f6f7;
+  border-color: #ccd0d5;
+  color: #4b4f56;
+}
+.col-md-8{
+  border: 1px solid #e3d4d4;
+  margin-top:3%;
+}
+.content .fixedHeightContainer .innerContent .col-md-8{
+  background-color:#fff;
+}
+.content{
+  background: #e9ebee;
+}
+/* To remove focus on bootstrap button after click*/
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  /* padding-top: 102px; */
+}
+body{
+    /* margin-top:20px; */
+    background:#FAFAFA;    
+}
+
+/*==================================================
+  Nearby People CSS
+  ==================================================*/
+  .fixedHeightContainer{
+    margin-left: 25%;
+    max-width: 70%; 
+  }
+/* .fixedHeightContainer{
+    margin-left: 25%;
+    height: 80%;
+    max-width: 70%;    
+}
+.innerContent{
+    height: 70%;
+    overflow:auto;
+}
+.topBar{
+    overflow: auto;
+} */
+.people-nearby .google-maps{
+  background: #f8f8f8;
+  border-radius: 4px;
+  border: 1px solid #f1f2f2;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.people-nearby .google-maps .map{
+  height: 300px;
+  width: 100%;
+  border: none;
+}
+
+.people-nearby .nearby-user{
+  padding: 20px 0;
+  border-top: 1px solid #f1f2f2;
+  border-bottom: 1px solid #f1f2f2;
+  margin-bottom: 20px;
+}
+
+img.profile-photo-lg{
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+}

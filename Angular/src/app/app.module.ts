@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { TopComponent } from './top/top.component';
 import { MessageComponent } from './message/message.component';
 import { FindFriendComponent } from './find-friend/find-friend.component';
+import { FriendsComponent } from './friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FindFriendComponent } from './find-friend/find-friend.component';
     HomeComponent,
     TopComponent,
     MessageComponent,
-    FindFriendComponent        
+    FindFriendComponent,
+    FriendsComponent        
   ],        
   imports: [   
     BrowserModule,
@@ -35,6 +37,7 @@ import { FindFriendComponent } from './find-friend/find-friend.component';
       {path:'home',component:HomeComponent},
       {path:'messages',component:MessageComponent},
       {path:'findFriends',component:FindFriendComponent},
+      {path:'friends',component:FriendsComponent}
       
     ])
   ],  

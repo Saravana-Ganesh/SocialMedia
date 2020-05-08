@@ -40,6 +40,10 @@ export class HomeComponent implements OnInit {
   findFriends(){    
     this.router.navigateByUrl('/findFriends');
     console.log('calling after router callesddddddddddd')
+  }
+  friends(){    
+    this.router.navigateByUrl('/friends');
+    console.log('calling after router callesddddddddddd')
   }    
 }               
                   

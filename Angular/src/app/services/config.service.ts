@@ -52,6 +52,10 @@ export class ConfigService {
     return this.http.post<any>('Media/viewSentRequests',data , {headers: this.headers});
   }
 
+  viewFriends(data){
+    return this.http.post<any>('Media/viewFriends',data , {headers: this.headers});
+  }
+
   // , {headers: this.headers}
     
 }

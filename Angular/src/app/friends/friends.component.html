@@ -1,0 +1,32 @@
+<div class="header" id="myheader">
+    <app-top></app-top>
+</div>
+<div class="content">   
+    <div class="container  fixedHeightContainer" >
+        <div class="row innerContent">
+            <div class="col-md-8">
+                <div class="heading" style="padding: 2%;        
+                font-weight: bold;">
+                    <h4>Your Friends List</h4>                           
+                </div>                                   
+                <div class="people-nearby">                   
+                <div class="nearby-user" *ngFor="let account of result">                
+                    <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                    </div>
+                    <div class="col-md-7 col-sm-7">
+                        <h5><a href="#" class="profile-link">{{account.name}}</a></h5>
+                        <p>Software Engineer</p>
+                        <!-- <p class="text-muted">500m away</p> -->
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <button [id]="account.email" class="btn btn-primary pull-right">{{friendsLabel}}</button>
+                    </div>
+                    </div>
+                </div>       
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
