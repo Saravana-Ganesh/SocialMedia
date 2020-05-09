@@ -12,6 +12,7 @@ export class FriendsComponent implements OnInit {
   data:any;
   result:any;
   friendsLabel = "Friends";
+  friendsCount:number;
   constructor(
     private configService:ConfigService,
   ) { }
@@ -24,7 +25,7 @@ export class FriendsComponent implements OnInit {
     this.configService.viewFriends(JSON.stringify(this.data)).subscribe(
       res =>{
         console.log(res);
-        this.processResponse(res.accountMasterBO);
+        this.processResponse(res.results,res.mutualFriends);
       });
   }
   scroll = (event): void => {
@@ -38,14 +39,21 @@ export class FriendsComponent implements OnInit {
       this.header.classList.remove("sticky");
     }
   }
-  processResponse(rawdata){
+  processResponse(rawdata,mutualFriends){
+    let content = "mutual friend";
+    let contentContainMutualFriend = " is a mutual friend";
     this.result = [];
     for(let i=0;i<rawdata.length;i++){
       this.result.push({
         "requestID":rawdata[i][0],
         "name":rawdata[i][1],
-        "email":rawdata[i][2]
+        "email":rawdata[i][2],
+        "mutualFriends":mutualFriends[i].length,
+        "mutualFriendExist":mutualFriends[i].length>0,
+        "mutualFriendText":(mutualFriends[i].length>1?mutualFriends[i].length+" "+content+"s":mutualFriends[i][0][1]+contentContainMutualFriend)
       });
     }
+    this.friendsCount = this.result.length;
+    console.log(this.result);
   }
 }

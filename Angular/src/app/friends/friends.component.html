@@ -7,7 +7,7 @@
             <div class="col-md-8">
                 <div class="heading" style="padding: 2%;        
                 font-weight: bold;">
-                    <h4>Your Friends List</h4>                           
+                    <h4>Friends ({{friendsCount}})</h4>                           
                 </div>                                   
                 <div class="people-nearby">                   
                 <div class="nearby-user" *ngFor="let account of result">                
@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-md-7 col-sm-7">
                         <h5><a href="#" class="profile-link">{{account.name}}</a></h5>
-                        <p>Software Engineer</p>
+                        <p *ngIf=account.mutualFriendExist>{{account.mutualFriendText}}</p>
                         <!-- <p class="text-muted">500m away</p> -->
                     </div>
                     <div class="col-md-3 col-sm-3">
