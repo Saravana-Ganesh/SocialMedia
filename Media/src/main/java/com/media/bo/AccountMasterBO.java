@@ -24,7 +24,7 @@ public class AccountMasterBO {
 	@Column(name="isActive")
 	private int isActive=1;
 	@Column(name="userid")
-	private int id=1;
+	private Integer id=1;
 	
 	
 	public void setIsActive(int isActive) {

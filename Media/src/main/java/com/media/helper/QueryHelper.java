@@ -60,10 +60,44 @@ public class QueryHelper {
 	
 	public static String viewFriends() {
 		//Query for view friend requests
-		return "select distinct AM.id ,AM.name,AM.email from AccountMasterBO AM " + 
+		return "select distinct AM.id as userid ,AM.name as name ,AM.email as email from AccountMasterBO AM " + 
 				" inner join FriendsMasterBO FM " + 
 				" on FM.friendEmail=AM.email or FM.userEmail = AM.email " + 
 				" where (FM.friendEmail=:currentUserEmail or FM.userEmail=:currentUserEmail) " + 
 				" and AM.email!=:currentUserEmail";
+	}
+	/*public static String viewMutualFriends() {
+		//Query for view friend requests
+		return "select t1.email from (select distinct AM.id as userid ,AM.name as name ,AM.email as email from AccountMasterBO AM " + 
+				" inner join FriendsMasterBO FM " + 
+				" on FM.friendEmail=AM.email or FM.userEmail = AM.email " + 
+				" where (FM.friendEmail=:currentUserEmail or FM.userEmail=:currentUserEmail) "+
+				"  and AM.email!=:currentUserEmail) t1 " + 				
+				" inner join " + 				
+				" (select distinct AM.id as userid ,AM.name as name ,AM.email as email from AccountMasterBO AM " + 
+				" inner join FriendsMasterBO FM " + 
+				" on FM.friendEmail=AM.email or FM.userEmail = AM.email " + 
+				" where (FM.friendEmail=:friendUserEmail or FM.userEmail=:friendUserEmail) " + 
+				" and AM.email!=:friendUserEmail) t2" + 		
+				" on t1.email=t2.email";
+				
+	}*/
+	public static String viewMutualFriends() {
+		//Query for view friend requests
+		//The below query is native oracle query
+		//This should be converted to hql query in future
+		return " select t1.email,t1.username from (select distinct am.userid,am.username,AM.email as email from account_master AM " + 
+				" inner join friends_master FM " + 
+				" on fm.friend_email=am.email or fm.user_email = am.email " + 
+				" where (fm.friend_email=? or fm.user_email = ?)" + 
+				" and am.email!=?) t1 " + 				 
+				" inner join " + 
+				" (select distinct am.userid,am.username,AM.email as email from account_master AM " + 
+				" inner join friends_master FM " + 
+				" on fm.friend_email=am.email or fm.user_email = am.email " + 
+				" where (fm.friend_email=? or fm.user_email = ?)" + 
+				" and am.email!= ?) t2" + 				
+				" on t1.email=t2.email";
+				
 	}
 }

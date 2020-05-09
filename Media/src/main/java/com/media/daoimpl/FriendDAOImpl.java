@@ -1,5 +1,6 @@
 package com.media.daoimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -49,9 +50,30 @@ public class FriendDAOImpl implements FriendDAO {
 		query.setParameter("currentUserEmail", email);
 		query.setParameter("currentUserEmail", email);
 		query.setParameter("currentUserEmail", email);
-		List<AccountMasterBO> results = query.list();
+		List<Object[]>results = query.list();
+		List<Object> mutualFriends = new ArrayList();;
+		for(int i=0;i<results.size();i++) {
+			Object [] a = results.get(i);
+			//Declare as J=2 because email comes as 2nd position from object array index
+			for(int j=2;j<a.length;j++) {
+				System.out.println(a[j]);
+				Query  query2= session.createNativeQuery((QueryHelper.viewMutualFriends()));
+				query2.setParameter(1, email);
+				query2.setParameter(2, email);
+				query2.setParameter(3, email);
+				
+				query2.setParameter(4, a[j].toString());
+				query2.setParameter(5, a[j].toString());
+				query2.setParameter(6, a[j].toString());
+				
+				mutualFriends.add(query2.list());
+				
+			}
+		}
+		System.out.println(query.list().get(0).toString());
 		ResponseBO responseBO = new ResponseBO();
-		responseBO.setAccountMasterBO(results);
+		responseBO.setResults(results);
+		responseBO.setMutualFriends(mutualFriends);
 		return responseBO;		
 	}
 	

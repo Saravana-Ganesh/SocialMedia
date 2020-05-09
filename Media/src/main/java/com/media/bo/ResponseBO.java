@@ -7,6 +7,8 @@ public class ResponseBO {
 	
 	private List<AccountMasterBO> accountMasterBO;
 	private List<FriendRequestMasterBO> friendRequestMasterBO;
+	private List<Object[]>results;
+	private List<Object>mutualFriends;
 	
 	private HeaderResponseBO headerResponseBO;
 
@@ -41,5 +43,21 @@ public class ResponseBO {
 
 	public void setHeaderResponseBO(HeaderResponseBO headerResponseBO) {
 		this.headerResponseBO = headerResponseBO;
+	}
+
+	public List<Object[]> getResults() {
+		return results;
+	}
+
+	public void setResults(List<Object[]> results) {
+		this.results = results;
+	}
+
+	public List<Object> getMutualFriends() {
+		return mutualFriends;
+	}
+
+	public void setMutualFriends(List<Object> mutualFriends) {
+		this.mutualFriends = mutualFriends;
 	}
 }
