@@ -100,4 +100,67 @@ public class QueryHelper {
 				" on t1.email=t2.email";
 				
 	}
+	
+	public static String viewAllMessageContent() {
+		/*
+		 * The below native query is for getting chat content with specific user
+		 */
+		return "select t1.id,t1.from_user,t1.username as fromUserName,t1.to_user,t2.username as ToUserName, "
+				+ "t1.message,(to_char(t1.date_time,'dd/mm/yyyy hh12:mi:ss AM')) from " + 
+				" (select MM.id,MM.from_user,AM.username,MM.to_user,mm.message,mm.date_time from message_master MM inner join account_master AM " + 
+				" on AM.email=MM.from_user " + 
+				" where ((MM.from_user =? and MM.to_user=?) " + 
+				" or (MM.to_user =? and MM.from_user =?)) "+ 
+				" and  mm.is_delete=0 " + 
+				" order by mm.date_time)t1 " + 
+				" inner join " + 
+				" (select MM.id, AM.username from message_master MM inner join account_master AM " + 
+				" on AM.email=MM.to_user " + 
+				" where ((MM.from_user =? and MM.to_user=?) " + 
+				" or (MM.to_user =? and MM.from_user =?)) " + 
+				" and  mm.is_delete=0 " + 
+				" order by mm.date_time) t2 " + 
+				" on t1.id=t2.id ";
+	}
+	
+	public static String viewMessageSidePanel() {
+		return  "select NVL(OUTT1.from_user,OUTT2.to_user) as Contact, " + 
+				" AM.username as Name, " + 
+				" case " + 
+				"    when OUTT1.date_time>NVL(OUTT2.date_time,'01-JAN-97') " + 
+				"        Then OUTT1.message " + 
+				"    else " + 
+				"        concat('You: ',OUTT2.message) " + 
+				"    END as Message, " + 
+				" case     " + 
+				"        when OUTT1.date_time>NVL(OUTT2.date_time,'01-JAN-97')         " + 
+				"            Then to_char(OUTT1.date_time,'mm/dd/yyyy hh12:mi AM') " + 
+				"   else          " + 
+				"        to_char(OUTT2.date_time,'mm/dd/yyyy hh12:mi AM') " + 
+				"   END as DATE_TIME," + 
+				" case " + 
+				"    when OUTT1.date_time>NVL(OUTT2.date_time,'01-JAN-97') " + 
+				"        Then OUTT1.status " + 
+				"    else " + 
+				"        1 " + 
+				"    END as Status" + 
+				" from " + 				 
+				" (select t1.from_user,MM.message, t1.date_time ,t1.status from " + 
+				" (select from_user,MAX(date_time) as date_time, status from message_master  " + 
+				" where to_user=? " + 
+				" group by from_user,status)t1 " + 
+				" inner join message_master MM " + 
+				" on MM.date_time = t1.date_time)OUTT1 " + 
+				" FULL outer join " + 				 
+				" (select t1.to_user,MM.message, t1.date_time,t1.status from " + 
+				" (select to_user,MAX(date_time) as date_time,status from message_master  " + 
+				" where from_user=? " + 
+				" group by to_user,status)t1 " + 
+				" inner join message_master MM " + 
+				" on MM.date_time = t1.date_time) OUTT2 " + 
+				" on outt2.to_user=OUTT1.from_user " + 
+				" inner join account_master AM " + 
+				" on am.email = NVL(OUTT1.from_user,OUTT2.to_user) " + 
+				" order by DATE_TIME desc";
+	}
 }

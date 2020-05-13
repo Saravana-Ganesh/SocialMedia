@@ -7,6 +7,7 @@ import com.media.bo.FriendRequestMasterBO;
 import com.media.bo.FriendsMasterBO;
 import com.media.bo.ResponseBO;
 import com.media.daoimpl.FriendDAOImpl;
+import com.media.daoimpl.HeaderDAOImpl;
 
 public class FriendService {
 
@@ -27,8 +28,12 @@ public class FriendService {
 	}
 
 	public ResponseBO viewFriends(ApplicationContext applicationContext, AccountMasterBO accountMasterBO) {
+		ResponseBO responseBO = new ResponseBO();
 		FriendDAOImpl friendDAOImpl= (FriendDAOImpl)applicationContext.getBean("friendDAOImpl");
-		return friendDAOImpl.viewFriends(accountMasterBO);
+		HeaderDAOImpl headerDAOImpl= (HeaderDAOImpl)applicationContext.getBean("headerDAOImpl");
+		responseBO = friendDAOImpl.viewFriends(accountMasterBO);
+		responseBO.setHeaderResponseBO(headerDAOImpl.getTopContent(accountMasterBO.getEmail()));
+		return responseBO;
 	}
 
 }

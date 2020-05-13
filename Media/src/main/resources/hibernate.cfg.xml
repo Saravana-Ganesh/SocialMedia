@@ -16,5 +16,6 @@
 			<mapping class="com.media.bo.AccountMasterBO"/>
 			<mapping class="com.media.bo.FriendsMasterBO"/>
 			<mapping class="com.media.bo.FriendRequestMasterBO"/>
+			<mapping class="com.media.bo.MessageBO"/>
 		</session-factory>
 </hibernate-configuration>

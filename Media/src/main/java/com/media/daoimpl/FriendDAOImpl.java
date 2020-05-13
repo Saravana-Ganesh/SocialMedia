@@ -70,7 +70,6 @@ public class FriendDAOImpl implements FriendDAO {
 				
 			}
 		}
-		System.out.println(query.list().get(0).toString());
 		ResponseBO responseBO = new ResponseBO();
 		responseBO.setResults(results);
 		responseBO.setMutualFriends(mutualFriends);
