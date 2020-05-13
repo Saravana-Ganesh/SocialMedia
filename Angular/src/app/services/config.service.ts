@@ -55,7 +55,19 @@ export class ConfigService {
   viewFriends(data){
     return this.http.post<any>('Media/viewFriends',data , {headers: this.headers});
   }
+   
+  
+  viewAllMessage(data){
+    return this.http.post<any>('Media/viewAllMessage',data , {headers: this.headers});
+  }
 
+  viewchatMessage(data){
+    return this.http.post<any>('Media/viewchatMessage',data , {headers: this.headers});
+  }
+
+  sendMessage(data){
+    return this.http.post<any>('Media/sendMessage',data , {headers: this.headers});
+  }
   // , {headers: this.headers}
     
 }

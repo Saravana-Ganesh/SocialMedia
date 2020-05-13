@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConfigService } from '../services/config.service';
+import { TopComponent } from '../top/top.component';
 
 @Component({
   selector: 'app-friends',
@@ -13,6 +14,7 @@ export class FriendsComponent implements OnInit {
   result:any;
   friendsLabel = "Friends";
   friendsCount:number;
+  @ViewChild(TopComponent) childComponent: TopComponent;
   constructor(
     private configService:ConfigService,
   ) { }
@@ -25,6 +27,7 @@ export class FriendsComponent implements OnInit {
     this.configService.viewFriends(JSON.stringify(this.data)).subscribe(
       res =>{
         console.log(res);
+        this.childComponent.loadHeader(res.headerResponseBO);
         this.processResponse(res.results,res.mutualFriends);
       });
   }
@@ -40,7 +43,7 @@ export class FriendsComponent implements OnInit {
     }
   }
   processResponse(rawdata,mutualFriends){
-    let content = "mutual friend";
+    let content = " mutual friends";
     let contentContainMutualFriend = " is a mutual friend";
     this.result = [];
     for(let i=0;i<rawdata.length;i++){
@@ -50,7 +53,7 @@ export class FriendsComponent implements OnInit {
         "email":rawdata[i][2],
         "mutualFriends":mutualFriends[i].length,
         "mutualFriendExist":mutualFriends[i].length>0,
-        "mutualFriendText":(mutualFriends[i].length>1?mutualFriends[i].length+" "+content+"s":mutualFriends[i][0][1]+contentContainMutualFriend)
+        "mutualFriendText":(mutualFriends[i].length>1?mutualFriends[i].length+content:(mutualFriends[i].length==1?mutualFriends[i][0][1]+contentContainMutualFriend:'No Mutual Friends Yet'))
       });
     }
     this.friendsCount = this.result.length;
