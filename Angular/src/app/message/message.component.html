@@ -61,7 +61,7 @@
                          <i class="fa fa-instagram" aria-hidden="true"></i>
                     </div>
                 </div>
-                <div class="messages">
+                <div class="messages" id="msgContainer">
                     <ul *ngFor="let account of messageContent">
                         <li class="sent"  *ngIf="account.fromUserEmail!=myEmail">
                             <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />

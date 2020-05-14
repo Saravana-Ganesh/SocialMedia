@@ -15,11 +15,12 @@ export class MessageComponent implements OnInit {
   data:any;
   myEmail:string;
   val:string;
-  friendNameInChat:string;
-  static friendEmailInChat:string;
+  public friendNameInChat:string;
+  public friendEmailInChat:string;
   @ViewChild(TopComponent) childComponent: TopComponent;
   chatSideContent=[];
   messageContent=[];
+  container: HTMLElement;     
   constructor( 
     private router:Router,
     private configService:ConfigService,
@@ -32,12 +33,21 @@ export class MessageComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }else{
       this.loadMessageContent();
+     
     }
   
   }
   ngAfterViewInit(): void{
-       //interval(1000).subscribe(x => this.loadMessageContent());
+    this.loadOneToOneChatMessage();                                     
   }
+
+  ngAfterViewChecked():void{
+   
+    console.log('called ngAfterViewChecked')
+    var objDiv = document.getElementById('msgContainer');
+    objDiv.scrollTop = objDiv.scrollHeight;    
+  }
+
   loadMessageContent(){
     this.name = localStorage.getItem('name');
       this.myEmail = localStorage.getItem('email');
@@ -64,6 +74,9 @@ export class MessageComponent implements OnInit {
       });
     }
     console.log(this.chatSideContent);
+    this.friendEmailInChat = this.chatSideContent[0].email;
+    this.friendNameInChat = this.chatSideContent[0].name;
+    localStorage.setItem('friendEmailInChat',this.friendEmailInChat);
   }
   drawMessagePanel(data){
     this.messageContent=[];
@@ -75,30 +88,38 @@ export class MessageComponent implements OnInit {
         "message":data[i][5],
         "dateTime":data[i][6]
       });
-    }
-    console.log(this.messageContent);
+    }   
+    console.log(this.messageContent);    
   }
+
   viewchatMessage(email,name){
     this.friendNameInChat = name;
-    MessageComponent.friendEmailInChat=email;
+    this.friendEmailInChat=email;
+    localStorage.setItem('friendEmailInChat',email);
     console.log('------------'+email)
-      this.data={
-        "fromUser":localStorage.getItem('email'),
-        "toUser":email
-      }
-      this.configService.viewchatMessage(JSON.stringify(this.data)).subscribe(
-        res=>{
-          this.drawMessagePanel(res.results)
-        }
-      );
+    this.loadOneToOneChatMessage();
   }
+
+  loadOneToOneChatMessage(){
+    console.log('----------------------'+localStorage.getItem('friendEmailInChat')+'-----------')
+    this.data={
+      "fromUser":localStorage.getItem('email'),
+      "toUser":localStorage.getItem('friendEmailInChat')
+    }
+    this.configService.viewchatMessage(JSON.stringify(this.data)).subscribe(
+      res=>{
+        this.drawMessagePanel(res.results);
+      }
+    );
+  }
+
   sendMessage(message){
     if(message!=''&&message!=undefined&&message!=null){
       this.val='';
       console.log(message);
       this.data={
         "fromUser":localStorage.getItem('email'),
-        "toUser":MessageComponent.friendEmailInChat,
+        "toUser":this.friendEmailInChat,
         "message":message
       }
       this.configService.sendMessage(JSON.stringify(this.data)).subscribe(
@@ -108,6 +129,9 @@ export class MessageComponent implements OnInit {
       );
     }    
     this.val='';
+    var objDiv = document.getElementById('msgContainer');
+    objDiv.scrollTop = objDiv.scrollHeight;
   }
-
+  // interval(500000).subscribe(x => this.loadMessageContent());
+    // interval(500000).subscribe(x => this.loadOneToOneChatMessage());
 }
