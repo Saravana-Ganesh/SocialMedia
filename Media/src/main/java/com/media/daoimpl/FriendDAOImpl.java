@@ -27,13 +27,15 @@ public class FriendDAOImpl implements FriendDAO {
 		return null;
 	}
 	public ResponseBO acceptFriendRequest(FriendsMasterBO friendsMasterBO) {
+		ResponseBO responseBO = new ResponseBO();
 		Query  query= session.createQuery(QueryHelper.acceptFriendRequest());
 		query.setParameter("id", friendsMasterBO.getId());
 		Transaction t1 = session.beginTransaction(); 
 		session.save(friendsMasterBO);
 		query.executeUpdate();
 		t1.commit();
-		return null;
+		responseBO.setValid(true);
+		return responseBO;
 	}
 	
 	public ResponseBO viewFriendRequests(AccountMasterBO accountMasterBO) {
